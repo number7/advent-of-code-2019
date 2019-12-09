@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"gkwkr/advent-of-code-2019/cmd/common"
+	"gkwkr/advent-of-code-2019/cmd/module-mass/computer"
 	"os"
 	"strconv"
 )
@@ -23,24 +24,9 @@ func main() {
 		if err != nil {
 			fmt.Printf("Line %v has a non-integer value.\n", i)
 		}
-		gas := computeGas(mass)
+		gas := computer.ComputeGas(mass)
 		fmt.Printf("Gas for line %v value of %v: %v\n", i, lineScanner.Text(), gas)
 		total += gas
 	}
 	fmt.Printf("TOTAL: %v\n", total)
-}
-
-func computeGas(mass int) int {
-	return compute(mass, new(int))
-}
-
-func compute(mass int, acc *int) int {
-	if mass <= 0 {
-		return *acc
-	}
-	gas := (mass / 3) - 2
-	if gas > 0 {
-		*acc += gas
-	}
-	return compute(gas, acc)
 }
