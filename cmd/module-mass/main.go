@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"gkwkr/advent-of-code-2019/cmd/common"
 	"os"
 	"strconv"
 )
@@ -11,11 +12,7 @@ func main() {
 	if len(os.Args) != 2 {
 		panic("You need to give a path to a file to read on the command line")
 	}
-	filename := os.Args[1]
-	datafile, err := os.Open(filename)
-	if err != nil {
-		panic(fmt.Sprintf("cant read your goddamned file %v", filename))
-	}
+	datafile := common.MustOpenFile(os.Args[1])
 	defer datafile.Close()
 
 	lineScanner := bufio.NewScanner(datafile)
