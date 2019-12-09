@@ -8,6 +8,9 @@ import (
 )
 
 func main() {
+	if len(os.Args) != 2 {
+		panic("You need to give a path to a file to read on the command line")
+	}
 	filename := os.Args[1]
 	datafile, err := os.Open(filename)
 	if err != nil {
