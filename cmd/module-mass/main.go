@@ -23,16 +23,18 @@ func main() {
 		if err != nil {
 			fmt.Printf("Line %v has a non-integer value.\n", i)
 		}
-		acc := new(int)
-		*acc = 0
-		gas := computeGas(mass, acc)
+		gas := computeGas(mass)
 		fmt.Printf("Gas for line %v value of %v: %v\n", i, lineScanner.Text(), gas)
 		total += gas
 	}
 	fmt.Printf("TOTAL: %v\n", total)
 }
 
-func computeGas(mass int, acc *int) int {
+func computeGas(mass int) int {
+	return compute(mass, new(int))
+}
+
+func compute(mass int, acc *int) int {
 	if mass <= 0 {
 		return *acc
 	}
@@ -40,5 +42,5 @@ func computeGas(mass int, acc *int) int {
 	if gas > 0 {
 		*acc += gas
 	}
-	return computeGas(gas, acc)
+	return compute(gas, acc)
 }
