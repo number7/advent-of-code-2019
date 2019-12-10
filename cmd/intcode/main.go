@@ -24,14 +24,14 @@ func main() {
 	}
 	datafile, err := ioutil.ReadFile(os.Args[1])
 	if err != nil {
-		panic(fmt.Sprintf("Unable to read in file %v\nError returned: %v", os.Args[1]))
+		panic(fmt.Sprintf("Unable to read in file %v\nError returned: %v", os.Args[1], err))
 	}
 	dataArrayString := strings.Split(string(datafile), ",")
 	dataArray := convertToIntegerArray(dataArrayString)
 
 	printArray(dataArray, "Values Before")
 
-	for i := 0; true; i++ {
+	for i := 0; true; i += 4 {
 		var total int
 		opcode := dataArray[i+OffsetOpCode]
 		if opcode == OpcodeTerminate {
@@ -54,7 +54,6 @@ func main() {
 			total = op1Value * op2Value
 		}
 		dataArray[location] = total
-		i += 3
 	}
 
 	printArray(dataArray, "Values After")
