@@ -30,10 +30,13 @@ func main() {
 	dataArray := convertToIntegerArray(dataArrayString)
 	printArray(dataArray, "Values Before")
 
-Done:
 	for i := 0; true; i++ {
 		var total int
 		opcode := dataArray[i+OffsetOpCode]
+		if opcode == OpcodeTerminate {
+			break
+		}
+
 		op1Position := dataArray[i+OffsetOperand1]
 		op2Position := dataArray[i+OffsetOperand2]
 		locationPosition := dataArray[i+OffsetLocation]
@@ -49,8 +52,6 @@ Done:
 			total = op1Value + op2Value
 		case OpcodeMultiply:
 			total = op1Value * op2Value
-		case OpcodeTerminate:
-			break Done
 		}
 		dataArray[locationPosition] = total
 		i += 3
@@ -73,6 +74,7 @@ func printArray(slice []int, header string) {
 	for i := 0; i < len(slice); i++ {
 		fmt.Printf("Position %v,%v,(%v)\n", i, slice[i], getAction(i))
 	}
+	fmt.Print("\n")
 }
 
 func getAction(i int) string {
