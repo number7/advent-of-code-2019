@@ -28,6 +28,7 @@ func main() {
 	}
 	dataArrayString := strings.Split(string(datafile), ",")
 	dataArray := convertToIntegerArray(dataArrayString)
+
 	printArray(dataArray, "Values Before")
 
 	for i := 0; true; i++ {
@@ -39,13 +40,12 @@ func main() {
 
 		op1Position := dataArray[i+OffsetOperand1]
 		op2Position := dataArray[i+OffsetOperand2]
-		locationPosition := dataArray[i+OffsetLocation]
+		location := dataArray[i+OffsetLocation]
 
 		op1Value := dataArray[op1Position]
 		op2Value := dataArray[op2Position]
-		//location := dataArray[locationPosition]
 
-		fmt.Printf("Operation %v: Opcode: %v\tOperand 1 Position: %v\tOperand 1: %v\tOperand 2 Position: %v\tOperand 2: %v\tLocation: %v\n", i, opcode, op1Position, op1Value, op2Position, op2Value, locationPosition)
+		fmt.Printf("Operation %v: Opcode: %v\tOperand 1 Position: %v\tOperand 1: %v\tOperand 2 Position: %v\tOperand 2: %v\tLocation: %v\n", i, opcode, op1Position, op1Value, op2Position, op2Value, location)
 
 		switch opcode {
 		case OpcodeAdd:
@@ -53,7 +53,7 @@ func main() {
 		case OpcodeMultiply:
 			total = op1Value * op2Value
 		}
-		dataArray[locationPosition] = total
+		dataArray[location] = total
 		i += 3
 	}
 
@@ -61,7 +61,7 @@ func main() {
 }
 
 func convertToIntegerArray(data []string) []int {
-	intArray := make([]int, len(data)+1)
+	intArray := make([]int, len(data))
 	for i := 0; i < len(data); i++ {
 		value, _ := strconv.Atoi(data[i])
 		intArray[i] = value
