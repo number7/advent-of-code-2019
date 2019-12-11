@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gkwkr/advent-of-code-2019/cmd/intcode/computer"
+	"github.com/number7/advent-of-code-2019/cmd/intcode/computer"
 	"io/ioutil"
 	"os"
 	"strconv"

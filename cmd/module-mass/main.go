@@ -3,8 +3,8 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"gkwkr/advent-of-code-2019/cmd/common"
-	"gkwkr/advent-of-code-2019/cmd/module-mass/computer"
+	"github.com/number7/advent-of-code-2019/cmd/common"
+	"github.com/number7/advent-of-code-2019/cmd/module-mass/computer"
 	"os"
 	"strconv"
 )
